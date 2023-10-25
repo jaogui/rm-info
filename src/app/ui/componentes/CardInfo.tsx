@@ -1,53 +1,75 @@
-import {useEffect} from "react";
-import { fetchDefault } from "@/app/data/api/axiosConfig";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Box,
-  Heading,
-  Stack,
-  StackDivider,
-  Text,
-  Avatar,
-} from "@chakra-ui/react";
-
+import { Card, CardBody, Box, Text, Avatar, Badge, Fade } from "@chakra-ui/react";
 
 interface cardProps {
-  avatar: String;
-  name: String;
+  avatar: string;
+  name: string;
+  gender: string;
+  status: string;
+  species: string;
 }
-export function CardContent({avatar, name }: cardProps) {
-  
-  useEffect(()=>{
-    async function fetchInfo(){
-      try{
-        const response = await fetchDefault.get('/character');
-        const data = await response.data;
-        console.log(data)
-      } catch(error){
-        console.error("Erro na requisição", error)
-      }
-    }
-    fetchInfo()
-  })
-
-
+export function CardContent(props: cardProps) {
   return (
-    <Card w="300px" h="300px" display="flex" alignItems="center" justifyContent="center">
-      <CardHeader>
-          <Avatar name="Avatar" size="lg" src="https://github.com/jaogui.png" />
-      </CardHeader>
-      <CardBody>
-        <Stack divider={<StackDivider />} spacing="4">
-          <Box>
-            <Heading size="xs">Title</Heading>
-            <Text pt="2" fontSize="sm">
-              Content 1
+    <>
+      <Card
+        p="20px"
+        w="250px"
+        h="300px"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        boxShadow="lg"
+        cursor="pointer"
+        borderRadius={"3xl"}
+        _hover={{border: "3px solid #f37ee06e"}}
+      >
+        <Avatar name="Avatar" size="xl" src={props.avatar} />
+        <CardBody>
+          <Text fontSize={16} textAlign="center" fontWeight="bold">
+            {props.name}
+          </Text>
+          <Box display="flex" gap={1} flexDirection="column" paddingTop={2}>
+            <Text
+              fontSize={13}
+              textAlign="center"
+              fontWeight="normal"
+              display="flex"
+              gap="5px"
+              alignItems="center"
+            >
+              <Badge fontSize={11} colorScheme="purple">
+                Species:
+              </Badge>
+              {props.species}
+            </Text>
+            <Text
+              fontSize={13}
+              textAlign="center"
+              fontWeight="normal"
+              display="flex"
+              gap="5px"
+              alignItems="center"
+            >
+              <Badge fontSize={11} colorScheme="green">
+                Gender:
+              </Badge>
+              {props.gender}
+            </Text>
+            <Text
+              fontSize={13}
+              textAlign="center"
+              fontWeight="normal"
+              display="flex"
+              gap="5px"
+              alignItems="center"
+            >
+              <Badge fontSize={11} colorScheme="pink">
+                Status:
+              </Badge>
+              {props.status}
             </Text>
           </Box>
-        </Stack>
-      </CardBody>
-    </Card>
+        </CardBody>
+      </Card>
+    </>
   );
 }
