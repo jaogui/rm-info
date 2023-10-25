@@ -1,8 +1,9 @@
 "use client";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, ModalContent } from "@chakra-ui/react";
 import { CardContent } from "./ui/componentes/CardInfo";
 import { useEffect, useState } from "react";
 import { fetchDefault } from "@/app/data/api/axiosConfig";
+import { ModalViewContent } from "./ui/componentes/modalContent";
 
 interface CaracterData {
   id: number;
@@ -17,18 +18,29 @@ export default function Home() {
   const [dataCaracter, setDataCaracter] = useState([]);
 
   useEffect(() => {
-    async function fetchInfo() {
+    async function fetchCharacter() {
       try {
         const response = await fetchDefault.get("/character");
         const data = await response.data.results;
         setDataCaracter(data);
+      } catch (error) {
+        console.error("Erro na requisição", error);
+      }
+    }
+
+    async function fetcLocations() {
+      try {
+        const response = await fetchDefault.get("/location");
+        const data = await response.data;
         console.log(data);
       } catch (error) {
         console.error("Erro na requisição", error);
       }
     }
-    fetchInfo();
+    fetcLocations()
+    fetchCharacter();
   }, []);
+
 
   return (
     <ChakraProvider>

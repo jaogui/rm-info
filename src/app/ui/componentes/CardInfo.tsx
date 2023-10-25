@@ -1,4 +1,6 @@
-import { Card, CardBody, Box, Text, Avatar, Badge, Fade } from "@chakra-ui/react";
+import { Card, CardBody, Box, Text, Avatar, Badge, Fade, useDisclosure } from "@chakra-ui/react";
+import { MouseEventHandler } from 'react';
+import { ModalViewContent } from "./modalContent";
 
 interface cardProps {
   avatar: string;
@@ -8,8 +10,15 @@ interface cardProps {
   species: string;
 }
 export function CardContent(props: cardProps) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  function openModal(){
+    onOpen();
+  }
+
   return (
     <>
+      <ModalViewContent isOpen={isOpen} onClose={onClose} /> 
       <Card
         p="20px"
         w="250px"
@@ -20,8 +29,10 @@ export function CardContent(props: cardProps) {
         boxShadow="lg"
         cursor="pointer"
         borderRadius={"3xl"}
+        onClick={openModal}
         _hover={{border: "3px solid #f37ee06e"}}
       >
+      
         <Avatar name="Avatar" size="xl" src={props.avatar} />
         <CardBody>
           <Text fontSize={16} textAlign="center" fontWeight="bold">
