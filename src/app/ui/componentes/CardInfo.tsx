@@ -30,7 +30,7 @@ export function CardContent(props: cardProps) {
       try {
         const response = await fetchDefault.get(`/character/${id}`);
         const data = await response.data;
-        console.log(data);
+        // console.log(data);
         setSelectedCharacterData(data);
       } catch (error) {
         console.error("Erro na requisição", error);

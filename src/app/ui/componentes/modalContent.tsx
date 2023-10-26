@@ -22,10 +22,6 @@ interface ModalViewContentProps {
 export function ModalViewContent(propsModal: ModalViewContentProps) {
   const characterData = propsModal.characterData;
 
-  useEffect(() => {
-    console.log("modal data", characterData);
-  }, [characterData]);
-
   return (
     <>
       <Modal

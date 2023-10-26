@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+ /* .slide-left {
+  animation: slide-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+} */
+
+@keyframes slide-right {
+  from {
+    transform: translateX(-600px);
+  }
+  to {
+    transform: translateX(0);
+  }
+} 
+
+.modalClass{
+  animation: slide-rigth 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
