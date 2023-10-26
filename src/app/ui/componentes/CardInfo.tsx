@@ -1,24 +1,53 @@
-import { Card, CardBody, Box, Text, Avatar, Badge, Fade, useDisclosure } from "@chakra-ui/react";
-import { MouseEventHandler } from 'react';
+import {
+  Card,
+  CardBody,
+  Box,
+  Text,
+  Avatar,
+  Badge,
+  Fade,
+  useDisclosure,
+} from "@chakra-ui/react";
+import { useContext, useState } from "react";
 import { ModalViewContent } from "./modalContent";
+import { fetchDefault } from "@/app/data/api/axiosConfig";
 
 interface cardProps {
+  id: number;
   avatar: string;
   name: string;
   gender: string;
   status: string;
   species: string;
 }
+
 export function CardContent(props: cardProps) {
+  const [selectedCharacterData, setSelectedCharacterData] = useState<CharacterData[]>([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  function openModal(){
+  async function handleEventCard(id: number) {
+    async function fetchDetailsCharacter() {
+      try {
+        const response = await fetchDefault.get(`/character/${id}`);
+        const data = await response.data;
+        console.log(data);
+        setSelectedCharacterData(data);
+      } catch (error) {
+        console.error("Erro na requisição", error);
+      }
+    }
+    fetchDetailsCharacter();
     onOpen();
   }
 
   return (
     <>
-      <ModalViewContent isOpen={isOpen} onClose={onClose} /> 
+      {selectedCharacterData? (
+        <ModalViewContent isOpen={isOpen} onClose={onClose} characterData={selectedCharacterData} />
+      ) : (
+        <p>Loading</p>
+      )}
+
       <Card
         p="20px"
         w="250px"
@@ -29,10 +58,9 @@ export function CardContent(props: cardProps) {
         boxShadow="lg"
         cursor="pointer"
         borderRadius={"3xl"}
-        onClick={openModal}
-        _hover={{border: "3px solid #f37ee06e"}}
+        onClick={() => handleEventCard(props.id)}
+        _hover={{ border: "3px solid #f37ee06e" }}
       >
-      
         <Avatar name="Avatar" size="xl" src={props.avatar} />
         <CardBody>
           <Text fontSize={16} textAlign="center" fontWeight="bold">
