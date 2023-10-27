@@ -9,7 +9,8 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { fetchDefault } from "@/app/data/api/axiosConfig";
-import { ModalViewContent } from "@/app/ui/componentes/ModalContent";
+import { ModalViewContent } from "./ModalContent";
+
 
 interface cardProps {
   id: number;
