@@ -1,6 +1,6 @@
 "use client";
 import { useContext, useEffect } from "react";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Button, Box, } from "@chakra-ui/react";
 import { CardContent } from "./ui/componentes/CardInfo";
 import { DataContext } from "@/app/data/hooks/ContextData";
 
@@ -16,13 +16,13 @@ export default function Home() {
   }
   const { characterDataFetch, handleLoadMore } = contextValue;
 
-  console.log(contextValue);
-  console.log(characterDataFetch);
+  // console.log(contextValue);
+  // console.log(characterDataFetch);
 
   return (
     <ChakraProvider>
-      <main className="py-10 bg-sky-50 ">
-        <div className="w-full max-w-[1200px] m-auto p-2 flex flex-wrap justify-between gap-10">
+      <main className="py-10 bg-sky-50 flex flex-col items-center gap-6">
+        <Box display="flex" flexWrap="wrap" gap="40px" justifyContent="center" maxW="1200px" w="full" margin="auto">
           {characterDataFetch ? (
             characterDataFetch.map((element, index) => (
               <CardContent
@@ -38,8 +38,8 @@ export default function Home() {
           ) : (
             <p>Loading</p>
           )}
-          <button onClick={handleMoreView}> Carregar mais</button>
-        </div>
+        </Box>
+          <Button onClick={handleMoreView} colorScheme="green" margin="auto"> Carregar mais</Button>
       </main>
     </ChakraProvider>
   );

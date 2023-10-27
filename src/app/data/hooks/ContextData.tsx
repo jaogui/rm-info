@@ -20,33 +20,31 @@ interface CharacterData {
   };
 }
 
-interface PaginationInfo {
-  currentPage: number;
-  totalPages: number;
-  itemsPerPage: number;
-}
+// interface PaginationInfo {
+//   currentPage: number;
+//   totalPages: number;
+//   itemsPerPage: number;
+// }
 
-interface CharacterDataResponse {
-  results: CharacterData[];
-  info: PaginationInfo;
-}
+// interface CharacterDataResponse {
+//   results: CharacterData[];
+//   info: PaginationInfo;
+// }
 
 interface DataContextProps {
   children: ReactNode;
 }
 
 interface DataContextValue {
- characterDataFetch: CharacterDataResponse[];
+ characterDataFetch: CharacterData[];
  handleLoadMore: () => void;
 }
 
 export const DataContext = createContext<DataContextValue | null>(null);
 
 export function ContextData({ children }: DataContextProps) {
-  const [characterDataFetch, setCharacterDataFetch] = useState<CharacterDataResponse[]>([]);
+  const [characterDataFetch, setCharacterDataFetch] = useState<CharacterData[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-
-
 
   useEffect(() => {
     async function fetchCharacter() {
@@ -55,15 +53,12 @@ export function ContextData({ children }: DataContextProps) {
         const response = await fetchDefault.get(`/character?page=${currentPage}`);
         const data = await response.data;
         setCharacterDataFetch((prevData) => {
-          // Filtra apenas os novos resultados que não existem no estado anterior
           const newResults = data.results.filter((newResult: CharacterData) => {
-            // Verifica se o novo resultado já existe no estado anterior
             return !prevData.some(
               (prevResult) =>
                 JSON.stringify(prevResult) === JSON.stringify(newResult)
             );
           });
-          // Adiciona apenas os novos resultados
           return [...prevData, ...newResults];
         });
       } catch (error) {
