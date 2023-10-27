@@ -11,12 +11,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-import { useEffect } from "react";
 
 interface ModalViewContentProps {
   isOpen: boolean;
   onClose: () => void;
-  characterData: CharacterData[];
+  characterData: CharacterData;
 }
 
 export function ModalViewContent(propsModal: ModalViewContentProps) {
@@ -27,7 +26,7 @@ export function ModalViewContent(propsModal: ModalViewContentProps) {
       <Modal
         isOpen={propsModal.isOpen}
         onClose={propsModal.onClose}
-        size={"sm"}
+        size="sm"
         scrollBehavior="inside"
       >
         <ModalContent
@@ -38,17 +37,17 @@ export function ModalViewContent(propsModal: ModalViewContentProps) {
           height="full"
           boxShadow="2xl"
           borderRadius="lg"
-          border="ActiveBorder"
+          border="3px solid #56d3e9ae"
         >
           <ModalHeader>
             <ModalCloseButton left="0.5" />
           </ModalHeader>
-          <ModalBody py="5">
+          <ModalBody>
             {propsModal.characterData ? (
-              <Box display="flex" flexDirection="column" gap="10px">
+              <Box display="flex" flexDirection="column" gap="20px" p="10px">
                 <div className="flex flex-col gap-2">
                   <Text display="flex" gap="5px" alignItems="center">
-                    <Badge fontSize={15} colorScheme="purple">
+                    <Badge fontSize={15} colorScheme="">
                       {propsModal.characterData.name}
                     </Badge>
                   </Text>
@@ -61,33 +60,33 @@ export function ModalViewContent(propsModal: ModalViewContentProps) {
                     alt="photo character"
                   />
                 </div>
-                <div className="flex flex-col gap-2 ">
-                  <Text display="flex" gap="5px" alignItems="center">
+                <div className="flex flex-col gap-2">
+                  <Text display="flex" gap="10px" alignItems="center" pb="5px" borderBottom="1px solid #e3e3e3">
                     <Badge fontSize={12} colorScheme="linkedin">
                       Specie
                     </Badge>
                     {propsModal.characterData.species}
                   </Text>
-                  <Text display="flex" gap="5px" alignItems="center">
+                  <Text display="flex" gap="5px" alignItems="center" pb="5px" borderBottom="1px solid #e3e3e3">
                     <Badge fontSize={12} colorScheme="green">
                       Gender
                     </Badge>
                     {propsModal.characterData.gender}
                   </Text>
-                  <Text display="flex" gap="5px" alignItems="center">
+                  <Text display="flex" gap="5px" alignItems="center" pb="5px" borderBottom="1px solid #e3e3e3">
                     <Badge fontSize={12} colorScheme="gray">
                       Location
                     </Badge>
                     {propsModal.characterData?.location?.name}
                   </Text>
-                  <Text display="flex" gap="5px" alignItems="center">
+                  <Text display="flex" gap="5px" alignItems="center" pb="5px" borderBottom="1px solid #e3e3e3">
                     <Badge fontSize={12} colorScheme="yellow">
                       Origin
                     </Badge>
                     {propsModal.characterData?.origin?.name}
                   </Text>
                   {propsModal.characterData.type ? (
-                    <Text display="flex" gap="5px" alignItems="center">
+                    <Text display="flex" gap="5px" alignItems="center" pb="5px" borderBottom="1px solid #e3e3e3">
                       <Badge fontSize={12} colorScheme="teal">
                         Type
                       </Badge>

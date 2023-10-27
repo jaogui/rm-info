@@ -5,12 +5,11 @@ import {
   Text,
   Avatar,
   Badge,
-  Fade,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useContext, useState } from "react";
-import { ModalViewContent } from "./modalContent";
+import { useState } from "react";
 import { fetchDefault } from "@/app/data/api/axiosConfig";
+import { ModalViewContent } from "./ModalContent";
 
 interface cardProps {
   id: number;
@@ -22,7 +21,8 @@ interface cardProps {
 }
 
 export function CardContent(props: cardProps) {
-  const [selectedCharacterData, setSelectedCharacterData] = useState<CharacterData[]>([]);
+  const [selectedCharacterData, setSelectedCharacterData] =
+    useState<CharacterData | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   async function handleEventCard(id: number) {
@@ -42,12 +42,13 @@ export function CardContent(props: cardProps) {
 
   return (
     <>
-      {selectedCharacterData? (
-        <ModalViewContent isOpen={isOpen} onClose={onClose} characterData={selectedCharacterData} />
-      ) : (
-        <p>Loading</p>
-      )}
-
+      {selectedCharacterData !== null ? (
+        <ModalViewContent
+          isOpen={isOpen}
+          onClose={onClose}
+          characterData={selectedCharacterData}
+        />
+      ) : null}
       <Card
         p="20px"
         w="250px"
