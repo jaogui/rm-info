@@ -2,13 +2,14 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { fetchDefault } from "../api/axiosConfig";
 
-interface CharacterData {
+export interface CharacterData {
   id: number;
   image: string;
   name: string;
   gender: string;
   status: string;
   species: string;
+  type?: string;
   episodes?: string[];
   location?: {
     name: string;
@@ -20,16 +21,6 @@ interface CharacterData {
   };
 }
 
-// interface PaginationInfo {
-//   currentPage: number;
-//   totalPages: number;
-//   itemsPerPage: number;
-// }
-
-// interface CharacterDataResponse {
-//   results: CharacterData[];
-//   info: PaginationInfo;
-// }
 
 interface DataContextProps {
   children: ReactNode;

@@ -10,7 +10,7 @@ import {
 import { useState } from "react";
 import { fetchDefault } from "@/app/data/api/axiosConfig";
 import { ModalViewContent } from "./ModalCard";
-
+import { CharacterData } from '../../data/hooks/ContextData'
 
 interface cardProps {
   id: number;
@@ -31,7 +31,6 @@ export function CardContent(props: cardProps) {
       try {
         const response = await fetchDefault.get(`/character/${id}`);
         const data = await response.data;
-        // console.log(data);
         setSelectedCharacterData(data);
       } catch (error) {
         console.error("Erro na requisição", error);
@@ -41,6 +40,7 @@ export function CardContent(props: cardProps) {
     onOpen();
   }
 
+
   return (
     <>
       {selectedCharacterData !== null ? (
@@ -49,7 +49,7 @@ export function CardContent(props: cardProps) {
           onClose={onClose}
           characterData={selectedCharacterData}
         />
-      ) : null}
+      ): null}
       <Card
         p="20px"
         w="250px"
