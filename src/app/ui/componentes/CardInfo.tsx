@@ -59,7 +59,8 @@ export function CardContent(props: cardProps) {
         justifyContent="center"
         boxShadow="lg"
         cursor="pointer"
-        borderRadius={"3xl"}
+        borderRadius="3xl"
+        className="font-montserrat"
         onClick={() => handleEventCard(props.id)}
         _hover={{ border: "3px solid #f37ee06e" }}
       >
@@ -78,7 +79,7 @@ export function CardContent(props: cardProps) {
               alignItems="center"
             >
               <Badge fontSize={11} colorScheme="purple">
-                Species:
+                Species
               </Badge>
               {props.species}
             </Text>
@@ -90,8 +91,8 @@ export function CardContent(props: cardProps) {
               gap="5px"
               alignItems="center"
             >
-              <Badge fontSize={11} colorScheme="green">
-                Gender:
+              <Badge fontSize={11} colorScheme="green" letterSpacing="wider">
+                Gender
               </Badge>
               {props.gender}
             </Text>
@@ -104,7 +105,7 @@ export function CardContent(props: cardProps) {
               alignItems="center"
             >
               <Badge fontSize={11} colorScheme="pink">
-                Status:
+                Status
               </Badge>
               {props.status}
             </Text>

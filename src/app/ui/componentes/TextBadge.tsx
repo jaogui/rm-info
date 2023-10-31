@@ -23,6 +23,7 @@ function TextBadge(props: TextView) {
       fontSize={12}
       colorScheme={props.colorBadge}
       maxWidth="150px"
+      className='font-syne tracking-widest'
     >
       {props.labelBadge}
     </Badge>
