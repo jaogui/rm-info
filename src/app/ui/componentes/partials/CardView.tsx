@@ -4,13 +4,13 @@ import {
   Box,
   Text,
   Avatar,
-  Badge,
   useDisclosure,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { fetchDefault } from "@/app/data/api/axiosConfig";
 import { ModalViewContent } from "./ModalCard";
-import { CharacterData } from '../../data/hooks/ContextData'
+import { CharacterData } from '../../../data/hooks/ContextData'
+import { CardDetails } from "./CardDetails";
 
 interface cardProps {
   id: number;
@@ -21,7 +21,7 @@ interface cardProps {
   species: string;
 }
 
-export function CardContent(props: cardProps) {
+export function CardView(props: cardProps) {
   const [selectedCharacterData, setSelectedCharacterData] =
     useState<CharacterData | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -39,7 +39,6 @@ export function CardContent(props: cardProps) {
     fetchDetailsCharacter();
     onOpen();
   }
-
 
   return (
     <>
@@ -60,55 +59,29 @@ export function CardContent(props: cardProps) {
         boxShadow="lg"
         cursor="pointer"
         borderRadius="3xl"
-        className="font-montserrat"
+        border="1px solid transparent"
+        className="font-montserrat hover:transition-all duration-75 animaLeft"
         onClick={() => handleEventCard(props.id)}
-        _hover={{ border: "3px solid #f37ee06e" }}
+        _hover={{ border: "3px solid #00b5cc" }}
       >
-        <Avatar name="Avatar" size="xl" src={props.avatar} />
+        <Avatar name="Avatar" size="xl" src={props.avatar} showBorder={true} border="1px solid cyan" />
         <CardBody>
           <Text fontSize={16} textAlign="center" fontWeight="bold">
             {props.name}
           </Text>
           <Box display="flex" gap={1} flexDirection="column" paddingTop={2}>
-            <Text
-              fontSize={13}
-              textAlign="center"
-              fontWeight="normal"
-              display="flex"
-              gap="5px"
-              alignItems="center"
-            >
-              <Badge fontSize={11} colorScheme="purple">
-                Species
-              </Badge>
-              {props.species}
-            </Text>
-            <Text
-              fontSize={13}
-              textAlign="center"
-              fontWeight="normal"
-              display="flex"
-              gap="5px"
-              alignItems="center"
-            >
-              <Badge fontSize={11} colorScheme="green" letterSpacing="wider">
-                Gender
-              </Badge>
-              {props.gender}
-            </Text>
-            <Text
-              fontSize={13}
-              textAlign="center"
-              fontWeight="normal"
-              display="flex"
-              gap="5px"
-              alignItems="center"
-            >
-              <Badge fontSize={11} colorScheme="pink">
-                Status
-              </Badge>
-              {props.status}
-            </Text>
+            <CardDetails 
+              labelInfo="Specie"
+              content={props.species}
+            />
+            <CardDetails 
+              labelInfo="Gender"
+              content={props.gender}
+            />
+            <CardDetails 
+              labelInfo="Status"
+              content={props.status}
+            />
           </Box>
         </CardBody>
       </Card>

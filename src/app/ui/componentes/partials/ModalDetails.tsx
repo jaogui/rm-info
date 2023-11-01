@@ -7,7 +7,7 @@ interface TextView{
   colorBadge: string;
 }
 
-function TextBadge(props: TextView) {
+export function ModalDetails(props: TextView) {
   return (
     <Text
     display="flex"
@@ -31,5 +31,3 @@ function TextBadge(props: TextView) {
   </Text>
   )
 }
-
-export default TextBadge

@@ -2,12 +2,17 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-@keyframes slide-right {
+@keyframes translateLeft {
   from {
-    transform: translateX(-600px);
+    transform: translate -100vw 0;
   }
   to {
-    transform: translateX(0);
+    transform: translate -100vw 0;
   }
 } 
+
+.animaLeft{
+  animation: translateLeft 1s ease;
+  animation-timeline: view();
+}
 

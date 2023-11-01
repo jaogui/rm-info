@@ -1,7 +1,7 @@
 "use client";
 import { useContext } from "react";
 import { ChakraProvider, Button, Box } from "@chakra-ui/react";
-import { CardContent } from "./ui/componentes/CardInfo";
+import { CardView } from "./ui/componentes/CardView";
 import { DataContext } from "@/app/data/hooks/ContextData";
 import { Plus } from "lucide-react";
 import { Loading } from "./ui/componentes/Loading";
@@ -37,7 +37,7 @@ export default function Home() {
               margin="auto"
             >
               {characterDataFetch.map((element, index) => (
-                <CardContent
+                <CardView
                   key={index}
                   id={element.id}
                   name={element.name}
