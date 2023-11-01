@@ -7,7 +7,6 @@ import {
   ModalCloseButton,
   Image,
   Box,
-  Badge,
   Text,
 } from "@chakra-ui/react";
 import { CharacterData } from "../../data/hooks/ContextData";
@@ -30,7 +29,6 @@ export function ModalViewContent(propsModal: ModalViewContentProps) {
           scrollBehavior="inside"
         >
           <ModalContent
-            className="modalClass"
             position="absolute"
             right={0}
             h="full"
@@ -45,10 +43,8 @@ export function ModalViewContent(propsModal: ModalViewContentProps) {
             <ModalBody>
               <Box display="flex" flexDirection="column" gap="20px" p="10px">
                 <div className="flex flex-col gap-2">
-                  <Text display="flex" gap="5px" alignItems="center">
-                    <Badge fontSize={15} colorScheme="">
-                      {propsModal.characterData.name}
-                    </Badge>
+                  <Text display="flex" gap="5px" alignItems="center" textTransform="uppercase" fontWeight="500" >
+                    {propsModal.characterData.name}
                   </Text>
                   <Image
                     src={propsModal.characterData.image}
