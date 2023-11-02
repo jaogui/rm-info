@@ -1,7 +1,7 @@
 "use client";
 import { useContext } from "react";
 import { ChakraProvider, Button, Box } from "@chakra-ui/react";
-import { CardView } from "./ui/componentes/CardView";
+import { CardView } from "./ui/componentes/partials/CardView";
 import { DataContext } from "@/app/data/hooks/ContextData";
 import { Plus } from "lucide-react";
 import { Loading } from "./ui/componentes/Loading";
@@ -35,6 +35,7 @@ export default function Home() {
               maxW="1200px"
               w="full"
               margin="auto"
+              position="relative"
             >
               {characterDataFetch.map((element, index) => (
                 <CardView
@@ -53,6 +54,8 @@ export default function Home() {
               colorScheme="cyan"
               margin="auto"
               borderRadius="full"
+              position="fixed"
+              bottom="30px"
             >
               <Plus color="white" />
             </Button>
