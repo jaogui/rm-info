@@ -29,6 +29,7 @@ interface DataContextProps {
 interface DataContextValue {
  characterDataFetch: CharacterData[];
  handleLoadMore: () => void;
+ isLoading: boolean;
 }
 
 export const DataContext = createContext<DataContextValue | null>(null);
@@ -36,11 +37,11 @@ export const DataContext = createContext<DataContextValue | null>(null);
 export function ContextData({ children }: DataContextProps) {
   const [characterDataFetch, setCharacterDataFetch] = useState<CharacterData[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchCharacter() {
       try {
-        console.log("currentPage", currentPage);
         const response = await fetchDefault.get(`/character?page=${currentPage}`);
         const data = await response.data;
         setCharacterDataFetch((prevData) => {
@@ -52,6 +53,7 @@ export function ContextData({ children }: DataContextProps) {
           });
           return [...prevData, ...newResults];
         });
+        setIsLoading(false)
       } catch (error) {
         console.error("Erro na requisição", error);
       }
@@ -60,11 +62,12 @@ export function ContextData({ children }: DataContextProps) {
   },[currentPage]);
 
   function handleLoadMore(){
+    setIsLoading(false)
     setCurrentPage((prevPage) => prevPage + 1);
   };
 
   return (
-    <DataContext.Provider value={{ characterDataFetch, handleLoadMore }}>
+    <DataContext.Provider value={{ characterDataFetch, handleLoadMore, isLoading }}>
       {children}
     </DataContext.Provider>
   );

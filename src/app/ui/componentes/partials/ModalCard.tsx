@@ -7,11 +7,10 @@ import {
   ModalCloseButton,
   Image,
   Box,
-  Badge,
   Text,
 } from "@chakra-ui/react";
-import { CharacterData } from "../../data/hooks/ContextData";
-import TextBadge from "./TextBadge";
+import { CharacterData } from "../../../data/hooks/ContextData";
+import { ModalDetails } from "./ModalDetails";
 
 interface ModalViewContentProps {
   isOpen: boolean;
@@ -30,25 +29,22 @@ export function ModalViewContent(propsModal: ModalViewContentProps) {
           scrollBehavior="inside"
         >
           <ModalContent
-            className="modalClass"
             position="absolute"
             right={0}
             h="full"
             height="full"
             boxShadow="2xl"
             borderRadius="lg"
-            border="3px solid #56d3e9ae"
+            className="border-[3px] border-rmBlue"
           >
             <ModalHeader>
-              <ModalCloseButton left="0.5" />
+              <ModalCloseButton right="3" />
             </ModalHeader>
             <ModalBody>
               <Box display="flex" flexDirection="column" gap="20px" p="10px">
                 <div className="flex flex-col gap-2">
-                  <Text display="flex" gap="5px" alignItems="center">
-                    <Badge fontSize={15} colorScheme="">
-                      {propsModal.characterData.name}
-                    </Badge>
+                  <Text display="flex" gap="5px" alignItems="center" textTransform="uppercase" fontWeight="500" >
+                    {propsModal.characterData.name}
                   </Text>
                   <Image
                     src={propsModal.characterData.image}
@@ -60,34 +56,34 @@ export function ModalViewContent(propsModal: ModalViewContentProps) {
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <TextBadge
+                  <ModalDetails
                     labelBadge="Specie"
                     infoText={propsModal.characterData.species}
                     colorBadge="purple"
                   />
-                  <TextBadge
+                  <ModalDetails
                     labelBadge="Gender"
                     infoText={propsModal.characterData.gender}
                     colorBadge="green"
                   />
-                  <TextBadge
+                  <ModalDetails
                     labelBadge="Location"
                     infoText={propsModal.characterData?.location?.name}
                     colorBadge="purple"
                   />
-                  <TextBadge
+                  <ModalDetails
                     labelBadge="Origin"
                     infoText={propsModal.characterData?.origin?.name}
                     colorBadge="green"
                   />
                   {propsModal.characterData.type ? (
-                    <TextBadge
+                    <ModalDetails
                       labelBadge="Type"
                       infoText={propsModal.characterData?.type}
                       colorBadge="purple"
                     />
                   ) : null}
-                  <TextBadge
+                  <ModalDetails
                     labelBadge="Status"
                     infoText={propsModal.characterData.status}
                     colorBadge="yellow"

@@ -7,7 +7,7 @@ interface TextView{
   colorBadge: string;
 }
 
-function TextBadge(props: TextView) {
+export function ModalDetails(props: TextView) {
   return (
     <Text
     display="flex"
@@ -23,6 +23,7 @@ function TextBadge(props: TextView) {
       fontSize={12}
       colorScheme={props.colorBadge}
       maxWidth="150px"
+      className='font-syne tracking-widest'
     >
       {props.labelBadge}
     </Badge>
@@ -30,5 +31,3 @@ function TextBadge(props: TextView) {
   </Text>
   )
 }
-
-export default TextBadge

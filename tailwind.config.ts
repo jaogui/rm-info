@@ -8,6 +8,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        creepster: ['var(--font-creepster)'],
+        syne: ['var(--font-syne)'],
+        montserrat: ['var(--font-montserrat)'],
+      },
+      colors:{
+        rmBlue: '#00b5cc',
+      }
     },
   },
   plugins: [],
