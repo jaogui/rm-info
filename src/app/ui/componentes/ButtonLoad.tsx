@@ -13,7 +13,7 @@ export function ButtonLoad() {
       setIsLoadingMore(true);
       setTimeout(() => {
         setIsLoadingMore(false); 
-      }, 100); 
+      }, 1000); 
     } catch (error) {
       console.error("Erro ao carregar mais dados:", error);
     }

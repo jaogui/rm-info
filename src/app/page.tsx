@@ -1,22 +1,12 @@
 "use client";
-import { useContext } from "react";
-import { ChakraProvider, Button, Box } from "@chakra-ui/react";
+import { ChakraProvider, Box } from "@chakra-ui/react";
 import { CardView } from "./ui/componentes/partials/CardView";
-import { DataContext } from "@/app/data/hooks/ContextData";
-import { Plus } from "lucide-react";
+import { useContextData } from "@/app/data/hooks/useContextData";
 import { Loading } from "./ui/componentes/Loading";
+import { ButtonLoad } from "./ui/componentes/ButtonLoad";
 
 export default function Home() {
-  const contextValue = useContext(DataContext);
-
-  if (!contextValue) {
-    return null;
-  }
-
-  function handleMoreView() {
-    handleLoadMore();
-  }
-  const { characterDataFetch, handleLoadMore, isLoading } = contextValue;
+  const { characterDataFetch, isLoading} =  useContextData()
 
   if (isLoading) {
     return <Loading />;
@@ -49,16 +39,7 @@ export default function Home() {
                 />
               ))}
             </Box>
-            <Button
-              onClick={handleMoreView}
-              colorScheme="cyan"
-              margin="auto"
-              borderRadius="full"
-              position="fixed"
-              bottom="30px"
-            >
-              <Plus color="white" />
-            </Button>
+            <ButtonLoad />
           </>
         ) : null}
       </main>
