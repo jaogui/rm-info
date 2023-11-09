@@ -28,6 +28,7 @@ export function ButtonLoad() {
       bottom="30px"
       onClick={handleBtn}
       disabled={isLoadingMore}
+      role="button"
     >
       <p className="text-white">{isLoadingMore ? "Loading.." : <Plus />}</p>
     </Button>
