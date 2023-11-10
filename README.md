@@ -6,7 +6,8 @@
     <li><a href="https://nextjs.org/" target="_blank">Nextjs</a></li>
     <li><a href="https://chakra-ui.com/" target="_blank">Chakra-ui</a></li>
     <li><a href="https://axios-http.com/docs/intro" target="_blank">Axios</a></li>
-    <li><a href="https://rickandmortyapi.com/documentation/" target="_blank">API data</a></li>
+    <li><a href="https://jestjs.io/" target="_blank">Jest</a></li>
+    <li><a href="https://testing-library.com/" target="_blank">Testing Library</a></li>
 </ul>
 <hr />
 <h3>Iniciar projeto local</h3>
