@@ -7,7 +7,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { fetchDefault } from "@/app/data/api/axiosConfig";
+import { fetchDefault } from "../../../data/api/axiosConfig";
 import { ModalViewContent } from "./ModalCard";
 import { CharacterData } from '../../../data/hooks/ContextData'
 import { CardDetails } from "./CardDetails";

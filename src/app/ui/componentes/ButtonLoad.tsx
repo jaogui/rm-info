@@ -27,10 +27,10 @@ export function ButtonLoad() {
       position="fixed"
       bottom="30px"
       onClick={handleBtn}
-      disabled={isLoadingMore}
+      isDisabled={isLoadingMore}
       role="button"
     >
-      <p className="text-white">{isLoadingMore ? "Loading.." : <Plus />}</p>
+      <p className="text-white">{isLoadingMore ? "Loading.." : <Plus data-testid="iconBtn" />}</p>
     </Button>
   );
 }
