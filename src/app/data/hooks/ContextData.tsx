@@ -43,9 +43,9 @@ export function ContextData({ children }: DataContextProps) {
     async function fetchCharacter() {
       try {
         const response = await fetchDefault.get(`/character?page=${currentPage}`);
-        const data = await response.data;
+        const data = await response.data.results;
         setCharacterDataFetch((prevData) => {
-          const newResults = data.results.filter((newResult: CharacterData) => {
+          const newResults = data.filter((newResult: CharacterData) => {
             return !prevData.some(
               (prevResult) =>
                 JSON.stringify(prevResult) === JSON.stringify(newResult)

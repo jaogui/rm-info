@@ -15,7 +15,7 @@ export function ButtonLoad() {
         setIsLoadingMore(false); 
       }, 1000); 
     } catch (error) {
-      console.error("Erro ao carregar mais dados:", error);
+      console.error("Error loading more data:", error);
     }
   }
 
