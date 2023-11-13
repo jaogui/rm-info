@@ -55,7 +55,7 @@ export function ContextData({ children }: DataContextProps) {
         });
         setIsLoading(false)
       } catch (error) {
-        console.error("Erro na requisição", error);
+        console.error("Request error", error);
       }
     }
     fetchCharacter();
