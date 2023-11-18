@@ -15,7 +15,7 @@ export function ButtonLoad() {
         setIsLoadingMore(false); 
       }, 1000); 
     } catch (error) {
-      console.error("Erro ao carregar mais dados:", error);
+      console.error("Error loading more data:", error);
     }
   }
 
@@ -27,9 +27,10 @@ export function ButtonLoad() {
       position="fixed"
       bottom="30px"
       onClick={handleBtn}
-      disabled={isLoadingMore}
+      isDisabled={isLoadingMore}
+      role="button"
     >
-      <p className="text-white">{isLoadingMore ? "Loading.." : <Plus />}</p>
+      <p className="text-white">{isLoadingMore ? "Loading.." : <Plus data-testid="iconBtn" />}</p>
     </Button>
   );
 }

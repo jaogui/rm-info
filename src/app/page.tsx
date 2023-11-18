@@ -1,7 +1,7 @@
 "use client";
 import { ChakraProvider, Box } from "@chakra-ui/react";
 import { CardView } from "./ui/componentes/partials/CardView";
-import { useContextData } from "@/app/data/hooks/useContextData";
+import { useContextData } from "../app/data/hooks/useContextData";
 import { Loading } from "./ui/componentes/Loading";
 import { ButtonLoad } from "./ui/componentes/ButtonLoad";
 
