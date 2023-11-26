@@ -3,7 +3,6 @@ import {
   CardBody,
   Box,
   Text,
-  Avatar,
   useDisclosure,
 } from "@chakra-ui/react";
 import { useState } from "react";
@@ -11,6 +10,7 @@ import { fetchDefault } from "../../../data/api/axiosConfig";
 import { ModalViewContent } from "./ModalCard";
 import { CharacterData } from '../../../data/hooks/ContextData'
 import { CardDetails } from "./CardDetails";
+import Image from "next/image";
 
 interface cardProps {
   id: number;
@@ -64,7 +64,7 @@ export function CardView(props: cardProps) {
         onClick={() => handleEventCard(props.id)}
         _hover={{ border: "3px solid #00b5cc" }}
       >
-        <Avatar name="Avatar" size="xl" src={props.avatar} showBorder={true} border="1px solid cyan" />
+        <Image src={props.avatar} alt="avatar" width={105} height={105} className="rounded-full" />
         <CardBody>
           <Text fontSize={16} textAlign="center" fontWeight="bold">
             {props.name}
