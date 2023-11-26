@@ -1,5 +1,12 @@
 "use client";
-import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { fetchDefault } from "../api/axiosConfig";
 
 export interface CharacterData {
@@ -30,57 +37,63 @@ interface DataContextValue {
   handleLoadMore: () => void;
   isLoading: boolean;
   setSearchInputQuery: Dispatch<SetStateAction<string>>;
-  searchCharacterData:  CharacterData[];
+  searchCharacterData: CharacterData[];
 }
 
 export const DataContext = createContext<DataContextValue | null>(null);
 
 export function ContextData({ children }: DataContextProps) {
-  const [characterDataFetch, setCharacterDataFetch] = useState<CharacterData[]>([]);
-  const [searchCharacterData, setSearchCharacterData] = useState<CharacterData[]>([]);
+  const [characterDataFetch, setCharacterDataFetch] = useState<CharacterData[]>(
+    []
+  );
+  const [searchCharacterData, setSearchCharacterData] = useState<
+    CharacterData[]
+  >([]);
   const [searchInputQuery, setSearchInputQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchCharacter() {
+    async function fetchData(){
       try {
-        const response = await fetchDefault.get(
-          `/character?page=${currentPage}`
-        );
-        const data = await response.data.results;
-        setCharacterDataFetch((prevData) => {
-          const newResults = data.filter((newResult: CharacterData) => {
-            return !prevData.some(
-              (prevResult) =>
-                JSON.stringify(prevResult) === JSON.stringify(newResult)
-            );
-          });
-          return [...prevData, ...newResults];
-        });
+        const endpoint = searchInputQuery
+          ? `https://rickandmortyapi.com/api/character/?page=${currentPage}&name=${searchInputQuery}`
+          : `/character?page=${currentPage}`;
+  
+        const response = await fetchDefault(endpoint);
+        const data = response.data.results;
+        console.log(data)
+  
+        const filterFunction = (prevData: CharacterData[]) => {
+          return (newResults: CharacterData[]) => {
+            return newResults.filter((newResult) => {
+              return !prevData.some(
+                (prevResult) =>
+                  JSON.stringify(prevResult) === JSON.stringify(newResult)
+              );
+            });
+          };
+        };
+  
+        if (searchInputQuery) {
+          // setCharacterDataFetch([]); // Limpar os dados normais
+          setSearchCharacterData(filterFunction([])(data)); // Definir os dados da busca
+        } else {
+          setCharacterDataFetch((prevData) => [
+            ...prevData,
+            ...filterFunction(prevData)(data),
+          ]);
+        }
+  
         setIsLoading(false);
       } catch (error) {
         console.error("Request error", error);
       }
-    }
-    fetchCharacter();
-  }, [currentPage]);
+    };
+    fetchData();
+    console.log(searchInputQuery)
+  }, [currentPage, searchInputQuery]);
 
-
-  useEffect(() => {
-    async function fetchSearch() {
-      try {
-        const response = await fetchDefault(`https://rickandmortyapi.com/api/character/?name=${searchInputQuery}`
-        );
-        const data = response.data.results;
-        console.log(data)
-        setSearchCharacterData(data)
-      } catch (error) {
-        console.error("Error search request", error);
-      }
-    }
-    fetchSearch()
-  }, [searchInputQuery]);
 
   function handleLoadMore() {
     setIsLoading(false);
@@ -89,7 +102,13 @@ export function ContextData({ children }: DataContextProps) {
 
   return (
     <DataContext.Provider
-      value={{ characterDataFetch, handleLoadMore, isLoading, setSearchInputQuery, searchCharacterData }}
+      value={{
+        characterDataFetch,
+        handleLoadMore,
+        isLoading,
+        setSearchInputQuery,
+        searchCharacterData,
+      }}
     >
       {children}
     </DataContext.Provider>
