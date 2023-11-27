@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <ContextData>
       <html lang="en" className={`${creepster.variable} ${syne.variable} ${montserrat.variable}`}>
-        <body>{children}</body>
+        <body className="bg-sky-50">{children}</body>
       </html>
     </ContextData>
   );
