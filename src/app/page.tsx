@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <ChakraProvider>
       <Header />
-      <main className="px-1 p-10 min-h-screen items-center w-full">
+      <main className="py-10 min-h-screen items-center w-full">
         <>
           <Box
             pt="6rem"
