@@ -54,7 +54,7 @@ export function ContextData({ children }: DataContextProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchData(){
+    async function fetchData() {
       try {
         const endpoint = searchInputQuery
           ? `https://rickandmortyapi.com/api/character/?page=${currentPage}&name=${searchInputQuery}`
@@ -62,7 +62,6 @@ export function ContextData({ children }: DataContextProps) {
   
         const response = await fetchDefault(endpoint);
         const data = response.data.results;
-        console.log(data)
   
         const filterFunction = (prevData: CharacterData[]) => {
           return (newResults: CharacterData[]) => {
@@ -75,10 +74,14 @@ export function ContextData({ children }: DataContextProps) {
           };
         };
   
-        if (searchInputQuery) {
-          // setCharacterDataFetch([]); // Limpar os dados normais
-          setSearchCharacterData(filterFunction([])(data)); // Definir os dados da busca
+        if (searchInputQuery !== '') {
+          setCharacterDataFetch([])
+          setSearchCharacterData((prevData) => {
+            return currentPage === 1 ? data : [...prevData, ...data];
+          });
+          setCharacterDataFetch([]); // Limpar os dados normais
         } else {
+          setSearchCharacterData([]); // Limpar os dados de pesquisa
           setCharacterDataFetch((prevData) => [
             ...prevData,
             ...filterFunction(prevData)(data),
@@ -89,9 +92,9 @@ export function ContextData({ children }: DataContextProps) {
       } catch (error) {
         console.error("Request error", error);
       }
-    };
+    }
+  
     fetchData();
-    console.log(searchInputQuery)
   }, [currentPage, searchInputQuery]);
 
 
