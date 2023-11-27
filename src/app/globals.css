@@ -2,6 +2,14 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+
+.containerMain{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
 @keyframes translateLeft {
   from {
     transform: translate -100vw 0;

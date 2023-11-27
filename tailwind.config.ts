@@ -15,6 +15,7 @@ const config: Config = {
       },
       colors:{
         rmBlue: '#00b5cc',
+        rmGreen: '#3B8596'
       }
     },
   },

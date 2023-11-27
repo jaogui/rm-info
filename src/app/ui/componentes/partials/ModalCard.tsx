@@ -31,6 +31,7 @@ export function ModalViewContent(propsModal: ModalViewContentProps) {
           <ModalContent
             position="absolute"
             right={0}
+            top="10px"
             h="full"
             height="full"
             boxShadow="2xl"

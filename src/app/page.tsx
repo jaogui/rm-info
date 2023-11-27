@@ -4,9 +4,11 @@ import { CardView } from "./ui/componentes/partials/CardView";
 import { useContextData } from "../app/data/hooks/useContextData";
 import { Loading } from "./ui/componentes/Loading";
 import { ButtonLoad } from "./ui/componentes/ButtonLoad";
+import { Header } from './ui/componentes/partials/Header';
 
 export default function Home() {
-  const { characterDataFetch, isLoading} =  useContextData()
+  const { characterDataFetch, isLoading, searchCharacterData } =
+    useContextData();
 
   if (isLoading) {
     return <Loading />;
@@ -14,34 +16,55 @@ export default function Home() {
 
   return (
     <ChakraProvider>
-      <main className="py-10 bg-sky-50 flex flex-col items-center gap-6 min-h-screen">
-        {characterDataFetch ? (
-          <>
-            <Box
-              display="flex"
-              flexWrap="wrap"
-              gap="40px"
-              justifyContent="center"
-              maxW="1200px"
-              w="full"
-              margin="auto"
-              position="relative"
-            >
-              {characterDataFetch.map((element, index) => (
-                <CardView
-                  key={index}
-                  id={element.id}
-                  name={element.name}
-                  avatar={element.image}
-                  species={element.species}
-                  gender={element.gender}
-                  status={element.status}
-                />
-              ))}
-            </Box>
+      <Header />
+      <main className="px-1 p-10 min-h-screen items-center w-full">
+        <>
+          <Box
+            pt="6rem"
+            display="flex"
+            flexWrap="wrap"
+            justifyContent="center"
+            gap="35px"
+            // maxW="1120px"
+            w="full"
+            position="relative"
+            margin="auto"
+            className="containerMain"
+          >
+            {/* Se houver uma pesquisa ativa, exiba os itens de pesquisa */}
+            {searchCharacterData.length > 0 ? (
+              <>
+                {searchCharacterData.map((element, index) => (
+                  <CardView
+                    key={index}
+                    id={element.id}
+                    name={element.name}
+                    avatar={element.image}
+                    species={element.species}
+                    gender={element.gender}
+                    status={element.status}
+                  />
+                ))}
+              </>
+            ) : (
+              <>
+                {/* Se não houver uma pesquisa ativa, exiba os itens normais */}
+                {characterDataFetch.map((element, index) => (
+                  <CardView
+                    key={index}
+                    id={element.id}
+                    name={element.name}
+                    avatar={element.image}
+                    species={element.species}
+                    gender={element.gender}
+                    status={element.status}
+                  />
+                ))}
+              </>
+            )}
             <ButtonLoad />
-          </>
-        ) : null}
+          </Box>
+        </>
       </main>
     </ChakraProvider>
   );

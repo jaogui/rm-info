@@ -22,7 +22,6 @@ export function ButtonLoad() {
   return (
     <Button
       colorScheme="cyan"
-      margin="auto"
       borderRadius="full"
       position="fixed"
       bottom="30px"
